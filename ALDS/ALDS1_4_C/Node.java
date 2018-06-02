@@ -11,16 +11,14 @@ class Node {
 	}
 
 	boolean find(char c) {
-		for (Node n : list) {
+		for (Node n : list)
 			if (n.c == c) return true;
-		}
 		return false;
 	}
 
 	Node get(char c) {
-		for (Node n : list) {
+		for (Node n : list)
 			if (n.c == c) return n;
-		}
 		return null;
 	}
 
