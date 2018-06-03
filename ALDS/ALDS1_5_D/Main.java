@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Main {
-	int cnt = 0;
+	long cnt = 0;
 	final int INFT = Integer.MAX_VALUE;
 
 	public static void main(String[] args) {
@@ -21,7 +21,7 @@ class Main {
 		System.out.println(cnt);
 	}
 
-	int bubbleSort(int[] a) {
+	long bubbleSort(int[] a) {
 		for (int i = 0; i < a.length; i++) {
 			for (int j = a.length - 1; j > i; j--) {
 				if (a[j] < a[j - 1]) {
