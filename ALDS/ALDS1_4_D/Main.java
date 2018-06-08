@@ -33,14 +33,14 @@ class Main {
 		while (lower < upper) {
 			boolean l = solve(lower);
 			boolean u = solve(upper);
-			if (l == false && u == true) {
+			if (!l && u) {
 				p = (lower + upper) / 2;
 				upper = p;
-			} else if (l == true && u == true) {
-				return lower;
-			} else if (l == false && u == false) {
+			} else if (!l && !u) {
 				upper = max;
 				lower = p;
+			} else if (l && u) {
+				return lower;
 			}
 		}
 		return p + 1;
@@ -52,10 +52,7 @@ class Main {
 			long truck = 0;
 			while (j < w.length) {
 				truck += w[j];
-
-				if (truck > p) {
-					break;
-				}
+				if (truck > p) break;
 				j++;
 			}
 			if (j == w.length) return true;
@@ -63,38 +60,4 @@ class Main {
 
 		return false;
 	}
-
-
-
-/*
-	int minMaximumcapacity() {
-		int p = wMax;
-		while (true) {
-			int j = 0;
-			for (int i = 0; i < trucks.length; i++) {
-				int v = numBags(p, j);
-				if (v == 0) { 
-					break;
-				}
-				j += v;
-			}
-			if (j == w.length)
-				break;
-			p++;
-		}
-		return p;
-	}
-
-	int numBags(long p, int j) {
-		int truck = 0;
-		int v = 0;
-		while (j < w.length) {
-			truck += w[j];
-			if (truck > p) break;
-			v++;
-			j++;
-		}
-		return v;
-	}
-*/
 }
