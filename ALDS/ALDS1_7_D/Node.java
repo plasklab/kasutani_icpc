@@ -12,24 +12,20 @@ class Node {
 	}
 
 	void setLeft(Node n) {
-		/*
 		System.out.print("left ");
 		n.parent.print();
 		System.out.print(" ");
 		n.print();
 		System.out.println();
-		*/
 		this.left = n;
 	}
 
 	void setRight(Node n) {
-		/*
 		System.out.print("right ");
 		n.parent.print();
 		System.out.print(" ");
 		n.print();
 		System.out.println();
-		*/
 		this.right = n;
 	}
 

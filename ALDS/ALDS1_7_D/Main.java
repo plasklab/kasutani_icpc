@@ -29,15 +29,18 @@ class Main {
 		j++;
 		createTree(root);
 
-		// printTree(root);
+		printTree(root);
+		System.out.println();
 		postorder(root);
+		System.out.println();
+		
 	}
 
 	void createTree(Node node) {
 		if (node.id == inorder[k]) {
 			k++;
 			if (j == n && k == n) return;
-			searchParent(node.parent);
+			searchParent(node);
 		} else if (node.left == null) {
 			node.setLeft(new Node(preorder[j], node));
 			j++;
@@ -51,9 +54,13 @@ class Main {
 
 	void searchParent(Node node) {
 			// System.out.println(j + " " + k);
-		/*if (node == null) {
-			return;
-		} else */if (node.id != inorder[k]) {
+		if (node.id != inorder[k]) {
+			if (node.parent == null) {
+				node.setRight(new Node(preorder[j], node));
+				j++;
+				createTree(node.right);
+				return;
+			}
 			searchParent(node.parent);
 		} else {
 			k++;
