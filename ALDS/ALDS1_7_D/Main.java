@@ -1,12 +1,12 @@
 import java.util.*;
+import java.lang.*;
 
 class Main {
-	Node root;
 	int n;
 	int[] preorder;
 	int[] inorder;
-	int j = 0;
-	int k = 0;
+	StringBuilder str;
+	int attension = 0;
 
 	public static void main(String[] args) {
 		new Main().run();
@@ -25,64 +25,38 @@ class Main {
 			inorder[i] = scan.nextInt();
 		}
 
-		root = new Node(preorder[0], null);
-		j++;
-		createTree(root);
+		Node root = createTree(0, inorder.length);
 
-		printTree(root);
-		System.out.println();
-		postorder(root);
-		System.out.println();
+		str = new StringBuilder();
+		str.append(postorder(root));
+		str.deleteCharAt(str.length() - 1);
+		System.out.println(str);
 		
 	}
 
-	void createTree(Node node) {
-		if (node.id == inorder[k]) {
-			k++;
-			if (j == n && k == n) return;
-			searchParent(node);
-		} else if (node.left == null) {
-			node.setLeft(new Node(preorder[j], node));
-			j++;
-			createTree(node.left);
-		} else if (node.right == null) {
-			node.setRight(new Node (preorder[j], node));
-			j++;
-			createTree(node.right);
-		}
-	}
-
-	void searchParent(Node node) {
-			// System.out.println(j + " " + k);
-		if (node.id != inorder[k]) {
-			if (node.parent == null) {
-				node.setRight(new Node(preorder[j], node));
-				j++;
-				createTree(node.right);
-				return;
+	Node createTree(int from, int to) {
+		int id = -1;
+		int i = from;
+		for (; i < to; i++) {
+			if (inorder[i] == preorder[attension]) {
+				id = inorder[i];
+				attension++;
+				break;
 			}
-			searchParent(node.parent);
-		} else {
-			k++;
-			createTree(node);
 		}
+		if (id == -1) return null;
+		Node n = new Node(id);
+		n.setLeft(createTree(from, i));
+		n.setRight(createTree(i + 1, to));
+
+		return n;
 	}
 
-	void postorder(Node node) {
+	String postorder(Node node) {
 		if (node.left != null)
-			postorder(node.left);
+			str.append(postorder(node.left));
 		if (node.right != null)
-			postorder(node.right);
-		node.print();
-		System.out.print(" ");
-	}
-
-	void printTree(Node node) {
-		node.print();
-		System.out.print(" ");
-		if (node.left != null)
-			printTree(node.left);
-		if (node.right != null)
-			printTree(node.right);
+			str.append(postorder(node.right));
+		return node.print();
 	}
 }
